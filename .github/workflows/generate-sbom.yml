@@ -1,5 +1,8 @@
 name: Generate SBOM
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [ master ]
@@ -11,17 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Generate SBOM
-        id: gensbom
-        uses: advanced-security/generate-sbom-action@v1
-#        with:
-#          format: spdx-json
-#          output: sbom.spdx.json
-      - name: Upload SBOM artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: sbom
-          path: ${{ steps.gensbom.outputs.fileName }}
+    - uses: actions/checkout@v4
+    - uses: advanced-security/generate-sbom-action@v1
+      id: gensbom
+    - uses: actions/upload-artifact@v4
+      with:
+        name: sbom
+        path: ${{ steps.gensbom.outputs.fileName }}
