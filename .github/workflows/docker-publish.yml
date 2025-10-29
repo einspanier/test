@@ -27,12 +27,12 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}:${GITHUB_REF_NAME}
+          tags: ghcr.io/${{ github.repository }}:latest
 
       - name: Generate SBOM
         uses: anchore/sbom-action@v0
         with:
-          image: ghcr.io/${{ github.repository }}:${GITHUB_REF_NAME}
+          image: ghcr.io/${{ github.repository }}:latest
           format: 'cyclonedx-json'
           output-file: 'sbom.cyclonedx.json'
 
