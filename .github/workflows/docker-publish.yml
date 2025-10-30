@@ -10,10 +10,10 @@ permissions:
   contents: read
   packages: write
   attestations: write
+  release: write
 
 jobs:
   build-and-push:
-    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
