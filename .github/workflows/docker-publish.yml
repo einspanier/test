@@ -47,10 +47,20 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: Get first tag
+        id: tagname
+        uses: actions/github-script@v8
+        env:
+          ALLTAGS: ${{ steps.meta.outputs.tags }}
+        with:
+          script: |
+            const tagname = process.env.ALLTAGS.split('\n')[0]
+            core.setOutput('tagname', tagname)
+
       - name: Generate SBOM
         uses: anchore/sbom-action@v0
         with:
-          image: ${{ split(steps.meta.outputs.tags, '\n')[0] }}
+          image: ${{ steps.tagname.outputs.tagname }}
           format: 'cyclonedx-json'
           output-file: 'sbom.cyclonedx.json'
 
