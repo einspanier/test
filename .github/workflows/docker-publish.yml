@@ -3,6 +3,8 @@ name: Build and Push Docker image
 on:
   release:
     types: [published]
+  pull_request:
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
