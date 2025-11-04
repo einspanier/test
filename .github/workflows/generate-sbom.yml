@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: advanced-security/generate-sbom-action@v1
       id: gensbom
     - uses: actions/upload-artifact@v4
